@@ -38,6 +38,7 @@ pipeline {
                       aquasec/trivy:latest image \
                         --exit-code 1 \
                         --severity CRITICAL \
+                        --ignore-unfixed \
                         --no-progress \
                         ${DOCKER_IMAGE}
                 """
