@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-aegis-ops
+  namespace: api-prod
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api-aegis-ops
+  template:
+    metadata:
+      labels:
+        app: api-aegis-ops
+    spec:
+      containers:
+        - name: api-aegis-ops
+          image: sebaabdou/api-aegis-ops:latest
+          ports:
+            - containerPort: 5000
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
