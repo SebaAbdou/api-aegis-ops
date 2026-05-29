@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: api-aegis-ops
-          image: sebaabdou/api-aegis-ops:latest
+          image: sebaabdou/api-aegis-ops:5
           ports:
             - containerPort: 5000
           readinessProbe:
